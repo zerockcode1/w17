@@ -6,5 +6,27 @@
 </head>
 <body>
 
+<div>
+    <button onclick="loadData('http://192.168.0.186:5555/w17/1team.json')">1팀</button>
+    <button onclick="loadData('http://192.168.0.223:5555/w17/2team.json')">2팀</button>
+    <button onclick="loadData('http://192.168.0.230:5555/w17/3team.json')">3팀</button>
+</div>
+
+<script>
+
+    function loadData(serverInfo){
+
+        console.log("loadData: " + serverInfo )
+
+        fetch(serverInfo)
+            .then(  response => response.json())
+            .then(  data => {
+                console.log(data)
+            })
+
+    }
+
+</script>
+
 </body>
 </html>
