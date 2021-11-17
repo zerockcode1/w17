@@ -12,6 +12,10 @@
     <button onclick="loadData('http://192.168.0.230:5555/w17/3team.json')">3팀</button>
 </div>
 
+<ul class="storeList">
+
+</ul>
+
 <script>
 
     function loadData(serverInfo){
@@ -21,10 +25,41 @@
         fetch(serverInfo)
             .then(  response => response.json())
             .then(  data => {
-                console.log(data)
+                //console.log(data)
+                makeList(data)
             })
 
     }
+
+    function makeList(arr){
+        const ulEle = document.querySelector(".storeList")
+        let str = ''
+
+        for (let i = 0; i < arr.length ; i++) {
+            console.log(arr[i])
+            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li>`
+        }//end for
+
+        ulEle.innerHTML = str
+    }
+
+    document.querySelector(".storeList").addEventListener("click", (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        const target = e.target
+
+        if(target.tagName !== 'LI'){
+            return
+        }
+
+        console.log(target)
+        const name = target.getAttribute("data-name")
+        const lat = target.getAttribute("data-lat")
+        const lng = target.getAttribute("data-lng")
+
+        console.log(name, lat, lng)
+
+    },false)
 
 </script>
 
