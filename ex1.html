@@ -9,6 +9,35 @@
 <!-- 지도를 표시할 div 입니다 -->
 <div id="map" style="width:100vw;height:50vh;"></div>
 <div id="result"></div>
+
+<style>
+
+    .menuDiv {
+        display: flex;
+        margin: 50px;
+        justify-content: space-between;
+
+    }
+
+    .menuDiv > a {
+        text-decoration: none;
+        background-color: blue;
+        color: white;
+        font-size: large;
+        border-radius: 3px;
+        padding: 10px;
+    }
+
+
+
+</style>
+
+<div class="menuDiv">
+    <a href="전체">전체</a>
+    <a href="카레">카레</a>
+    <a href="일식">일식</a>
+</div>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63d16a88212b46758759f3136d823241"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -63,16 +92,33 @@
         {name:'오복수산' ,   lat:37.5376784 , lng:127.0018967  , menu:'일식'},
         {name:'스시코테이' , lat:37.5276863 , lng:127.031121 , menu:'일식'},
         {name:'호별관' ,    lat:37.5095451 , lng:127.03487724  , menu:'일식'},
-    ]
-
-    showMarkers(arr)
-
-    const arr2 = [
         {name:'타지팰리스' , lat:37.54450731 , lng:126.9915116  , menu:'카레'},
         {name:'죠티인도' ,   lat:37.5550446 , lng:126.9379293  , menu:'카레'},
         {name:'예티 인도' , lat:37.5655634 , lng:126.9233787 , menu:'카레'}
     ]
-    showMarkers(arr2)
+
+    document.querySelector(".menuDiv").addEventListener("click", (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        if(target.tagName !== 'A'){
+            return
+        }
+        console.log("A태그 클릭")
+        const keyword = target.getAttribute("href")
+
+        if(keyword !== '전체'){
+            const result = arr.filter(s => s.menu === keyword)
+
+            showMarkers(result)
+        }else {
+            showMarkers(arr)
+        }
+
+
+    }, false)
 
 </script>
 
