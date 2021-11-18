@@ -1,14 +1,14 @@
 const storeService = (function (){
 
-    const storeArr = []
+    let storeArr = []
 
-    function loadData(url){
+    function loadData(url, callback){
         fetch(url)
             .then(  response => response.json())
             .then(  data => {
-
-                console.log(data)
-
+                //console.log(data)
+                storeArr = data
+                callback(data)
             })
     }
 

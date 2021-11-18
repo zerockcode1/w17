@@ -6,11 +6,31 @@
 </head>
 <body>
 
+
+<ul class="storeList">
+</ul>
+
 <script src="ex4.js"></script>
 
 <script>
+    function makeList(arr){
+        const storeULEle = document.querySelector(".storeList")
+        let str = ''
 
-    storeService.loadData("http://localhost:5555/w17/1team.json")
+        for (let i = 0; i < arr.length ; i++) {
+            console.log(arr[i])
+            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li>`
+        }//end for
+
+        storeULEle.innerHTML = str
+    }
+
+
+    storeService.loadData("http://localhost:5555/w17/1team.json", (arr) => {
+        console.log("callback............")
+        console.log(arr)
+        makeList(arr)
+    })
 
 </script>
 
