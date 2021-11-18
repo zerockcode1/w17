@@ -33,7 +33,7 @@
 
 <script>
     function changeData(url){
-        alert("changeData")
+
         storeService.loadData(url, (arr) => {
             console.log("callback............")
             console.log(arr)
@@ -48,7 +48,7 @@
 
         for (let i = 0; i < arr.length ; i++) {
             console.log(arr[i])
-            str += `<li>${arr[i].name}</li>`
+            str += `<li data-idx="${i}">${arr[i].name}</li>`
         }//end for
 
         storeULEle.innerHTML = str
@@ -75,6 +75,18 @@
         }//end for
     }
 
+    document.querySelector(".storeList").addEventListener("click",(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const target = e.target
+
+        const idx = target.getAttribute("data-idx")
+        const store = storeService.getDataByIndex(idx)
+        console.log(store)
+
+        showMarkers([store])
+
+    },false)
 
 
 </script>

@@ -12,6 +12,11 @@ const storeService = (function (){
             })
     }
 
-    return {loadData}
+    function getDataByIndex(index){
+
+        return storeArr[index]
+    }
+
+    return {loadData, getDataByIndex}
 
 })()
